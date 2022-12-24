@@ -9,7 +9,7 @@
 #pragma warning(disable : 4996)
 
 #include<iostream>
-#include <string>
+#include<string>
 #include<map>
 #include<iterator>
 #include<cstring>
@@ -17,22 +17,47 @@ using namespace std;
 
 // Prototypes
 int romanToInt(string);
-int main() {    
+int main() {
     //Initializers
     const int SZ = 10;
-    char numeral [SZ];
+    char numeral[SZ];
     bool vrfy = false;
     int fValue = 0;
+    string repeat = "";
 
-    // Gather input
-    cout << "\nPlease, input a roman numeral between 1 and 3999>" << endl;
-    cin.get(numeral,SZ);
-    cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    do 
+    {
+        // Gather input
+        cout << "\nPlease, input a roman numeral between 1 and 3999>" << endl;
+        cin.get(numeral, SZ);
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    //Process input
-    fValue = romanToInt(numeral);
-    cout << "\nThe converted value is " << fValue << "." << endl;
+        //Process input
+        fValue = romanToInt(numeral);
+        
+        // Verify value is less than 4000 or greater than 1
+        if (fValue >= 4000 || fValue < 1)
+        {
+            cout << "\nYou entered an invalid roman numeral value. Please try again." << endl;
+            vrfy = false;
+        }
+        else 
+        {
+            cout << "\nThe converted value is " << fValue << "." << endl; 
+
+            // Ask user if they would like to continue
+            cout << "\nWould you like to convert another roman numeral, Y or N?>" << endl;
+            cin >> repeat;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            if (repeat == "N"|| repeat == "n") {
+                vrfy = true;
+            }
+        }
+    } while (vrfy == false);
+
+
 }
 // Functions
 
